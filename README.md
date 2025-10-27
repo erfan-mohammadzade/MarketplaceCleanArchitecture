@@ -81,10 +81,11 @@ The **Presentation** layer handles **user requests**, **controllers**, and **app
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/marketplace.git
+git clone https://github.com/erfan-mohammadzade/MarketplaceCleanArchitecture.git
 
 # Navigate to the project folder
 cd marketplace
 
 # Build and run
 dotnet run  # or use your build system
+
