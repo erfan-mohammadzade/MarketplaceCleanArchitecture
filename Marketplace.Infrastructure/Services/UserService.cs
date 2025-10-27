@@ -2,7 +2,6 @@
 using Marketplace.Infrustructure.Presentation;
 using Microsoft.EntityFrameworkCore;
 using Marketplace.Domain.Entities;
-using Marketplace.Infrustructure.Model.Services;
 
 public class UserService : IUserService
 {
@@ -31,7 +30,7 @@ public class UserService : IUserService
     {
         var user = await _userRepository.GetByIdWithItemAsync(userId, cancellationToken) 
             ?? throw new InvalidOperationException("User not found");
-        if (item.Id != Guid.Empty)
+        if (item.Id != 0)
         {
             var existing = await _itemRepository.GetByIdAsync(item.Id, cancellationToken);
             if (existing == null)
@@ -41,13 +40,13 @@ public class UserService : IUserService
             else
             {
                 user.Items.Add(item);
-                await _itemRepository.AddItemAsync(item,cancellationToken);
+                await _itemRepository.AddAsync(item,cancellationToken);
             }
         }
         else
         {
             user.Items.Add(item);
-            await _itemRepository.AddItemAsync(item, cancellationToken);
+            await _itemRepository.AddAsync(item, cancellationToken);
         }
 
         await _userRepository.SaveAsync(cancellationToken);
