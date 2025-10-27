@@ -84,8 +84,9 @@ The **Presentation** layer handles **user requests**, **controllers**, and **app
 git clone https://github.com/erfan-mohammadzade/MarketplaceCleanArchitecture.git
 
 # Navigate to the project folder
-cd marketplace
+cd MarketplaceCleanArchitecture
 
 # Build and run
 dotnet run  # or use your build system
+
 
