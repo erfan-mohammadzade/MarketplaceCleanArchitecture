@@ -2,6 +2,8 @@
 using Marketplace.Infrustructure.Presentation;
 using Microsoft.EntityFrameworkCore;
 
+namespace Marketplace.Infrustructure.Services;
+
 public class UserRepository : IUserRepository
 {
     private readonly DatabaseManager _databaseManager;
@@ -36,6 +38,6 @@ public class UserRepository : IUserRepository
 
     public Task SaveAsync(CancellationToken cancellationToken = default)
     {
-       return _databaseManager.SaveChangesAsync(cancellationToken);
+        return _databaseManager.SaveChangesAsync(cancellationToken);
     }
 }

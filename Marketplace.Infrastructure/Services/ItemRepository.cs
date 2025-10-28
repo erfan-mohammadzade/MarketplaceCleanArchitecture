@@ -3,6 +3,8 @@ using Marketplace.Domain.Entities;
 using Marketplace.Infrustructure.Presentation;
 using Microsoft.EntityFrameworkCore;
 
+namespace Marketplace.Infrustructure.Services;
+
 public class ItemRepository : IItemRepository
 {
     private readonly DatabaseManager _databaseManager;

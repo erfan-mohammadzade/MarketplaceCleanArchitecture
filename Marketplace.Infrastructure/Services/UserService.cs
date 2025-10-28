@@ -1,7 +1,6 @@
-﻿
-using Marketplace.Infrustructure.Presentation;
-using Microsoft.EntityFrameworkCore;
-using Marketplace.Domain.Entities;
+﻿using Marketplace.Domain.Entities;
+
+namespace Marketplace.Infrustructure.Services;
 
 public class UserService : IUserService
 {
@@ -16,26 +15,26 @@ public class UserService : IUserService
 
     public async Task<User?> GetUserWithItemsAsync(int id, CancellationToken cancellationToken = default)
     {
-        return await _userRepository.GetByIdWithItemAsync(id);
+        return await _userRepository.GetByIdWithItemAsync(id, cancellationToken);
     }
 
     public async Task<int> CreateUserAsync(User user, CancellationToken cancellationToken = default)
     {
-        await _userRepository.AddAsync(user);
-        await _userRepository.SaveAsync();
+        await _userRepository.AddAsync(user, cancellationToken);
+        await _userRepository.SaveAsync(cancellationToken);
         return user.UserId;
     }
 
     public async Task AddItemToUserAsync(int userId, Item item, CancellationToken cancellationToken = default)
     {
         var user = await _userRepository.GetByIdWithItemAsync(userId, cancellationToken) 
-            ?? throw new InvalidOperationException("User not found");
+                   ?? throw new InvalidOperationException("User not found");
         if (item.Id != 0)
         {
             var existing = await _itemRepository.GetByIdAsync(item.Id, cancellationToken);
             if (existing == null)
             {
-                user.Items.Add(existing);
+                user.Items?.Add(existing);
             }
             else
             {

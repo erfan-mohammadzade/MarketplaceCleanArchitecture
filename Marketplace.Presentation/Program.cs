@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Application; 
-using Marketplace.Infrustructure.Presentation; 
+using Marketplace.Application;
+using Marketplace.Application.Interfaces;
+using Marketplace.Infrustructure.Presentation;
+using Marketplace.Infrustructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +21,9 @@ builder.Services.AddDbContext<DatabaseManager>(options =>
     options.UseSqlServer(connectionString));
 
 // Register Repositories and Services
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ItemRepository, ItemRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<ItemRepository>();
+builder.Services.AddScoped<UserService>();
 
 // Build app
 var app = builder.Build();
